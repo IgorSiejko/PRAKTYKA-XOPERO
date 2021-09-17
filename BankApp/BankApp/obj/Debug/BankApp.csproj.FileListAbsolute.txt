@@ -1,0 +1,15 @@
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.csproj.AssemblyReference.cache
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\MainWindow.g.cs
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\App.g.cs
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp_MarkupCompile.cache
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp_MarkupCompile.lref
+C:\Users\xopero\source\repos\BankApp\BankApp\bin\Debug\BankApp.exe.config
+C:\Users\xopero\source\repos\BankApp\BankApp\bin\Debug\BankApp.exe
+C:\Users\xopero\source\repos\BankApp\BankApp\bin\Debug\BankApp.pdb
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\MainWindow.baml
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.g.resources
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.Properties.Resources.resources
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.csproj.GenerateResource.cache
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.csproj.CoreCompileInputs.cache
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.exe
+C:\Users\xopero\source\repos\BankApp\BankApp\obj\Debug\BankApp.pdb
