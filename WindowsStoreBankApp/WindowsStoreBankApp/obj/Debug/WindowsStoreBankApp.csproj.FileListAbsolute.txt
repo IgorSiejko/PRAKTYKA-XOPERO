@@ -1,0 +1,15 @@
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.csproj.AssemblyReference.cache
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\MainWindow.g.cs
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\App.g.cs
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp_MarkupCompile.cache
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp_MarkupCompile.lref
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\bin\Debug\WindowsStoreBankApp.exe.config
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\bin\Debug\WindowsStoreBankApp.exe
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\bin\Debug\WindowsStoreBankApp.pdb
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\MainWindow.baml
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.g.resources
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.Properties.Resources.resources
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.csproj.GenerateResource.cache
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.csproj.CoreCompileInputs.cache
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.exe
+C:\Users\xopero\source\repos\WindowsStoreBankApp\WindowsStoreBankApp\obj\Debug\WindowsStoreBankApp.pdb
