@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,8 +59,10 @@ namespace Kalkulator
         }
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            int milesTraveled2 = endingMileage-startingMileage;
-            MessageBox.Show(milesTraveled + " kilometrów", "Przebyta odległość");
+            startingMileage = Convert.ToInt32(Button1.Text);
+            endingMileage = Convert.ToInt32(Button2.Text);
+            int milesTraveled2 = endingMileage -= startingMileage;
+            MessageBox.Show(milesTraveled2 + " kilometrów", "Przebyta odległość");
         }
 
         private void Button1_TextChanged(object sender, TextChangedEventArgs e)
