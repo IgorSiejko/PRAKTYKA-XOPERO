@@ -1,0 +1,332 @@
+1. VSS - technologia Windows, pozwalająca na wykonywanie ręcznych lub automatycznych kopii zapasowych (plików nawet gdy są one używane)
+ 
+2. Deduplikacja, jest to proces usuwania powtarzających się rekordów w zbiorze danych
+ Dzieli się ona na 4 rodzaje 
+  -Eliminacja identycznych duplikatów 
+	eliminacja plików, które są identycznymi kopiami pliku uprzednio zapisanego polegająca na sprawdzania hasha przynależnego do plików, w przypadku identyczności traktowane są jakot ten sam plik
+	Wada: w przypadku nawet drobnej zmiany pliku musi on zostać zapisany na nowo
+   -Deduplikacja blokiem o stałej wielkości
+	Dzieli pliki na bloku, o stałej wielkości między 4, a 64 kB. Gotowy już blok otrzymuje utworzony hasha
+	Wada:brak możliwości rozpoznania kopii po modyfikacji kiedy to modyfikacja nie będzie wprowadzona na końcu
+    -Deduplikacja blokiem o zmiennej wartości
+	Polega na ustalaniu "w locie" wielkości danego bloku, który jest porównywany zaletą tego rozwiązania 
+	jest możliwość rozpoznawania dokonanych zmian w każdym momencie
+	Wady: Żmudność całego procesu, dosyć nieefektywne radzenie sobie z za małymi jak i za dużymi plikami
+    -Deduplikacja progresywna
+	jest to połączenie deduplikacji o zmiennej i stałej wartości, jest szybka i bardzo precyzyjna z racji iż jest w stanie porównywać duplikat co do bajta
+ 
+3. Kompresja - zmiana sposobu zapisu informacji w celu zmniejszenia redundancji i tym samym objętości zbioru. Innymi słowy chodzi o wyrażenie tego samego zestawu informacji, lecz za pomocą mniejszej liczby bitów.
+ 
+Kompresja dzieli się na bezstratną – w której z postaci skompresowanej można odzyskać identyczną postać pierwotną oraz stratną – w której takie odzyskanie jest niemożliwe, jednak główne właściwości zostają zachowane. Np. jeśli kompresowany jest obrazek, nie widać znaczących różnic w stosunku do oryginału. Pomimo to może się już nie nadawać do dalszej przeróbki czy do wydruku, gdyż w tych zastosowaniach wymaga się zachowania innych właściwości
+ 
+Algorytmy kompresji stratnej często jako ostatniej fazy używają kompresji bezstratnej. W takim przypadku poprzednie fazy mają za zadanie nie tyle kompresować, ile przygotować dane do łatwiejszej kompresji.
+ 
+4. Szyfrowanie to proces polegający na przekształcaniu tekstu jawnego i otwartego w kryptogram, czyli tekst zaszyfrowany. Aby operacja była w ogóle możliwa, potrzebny jest klucz algorytmu szyfrującego, który umożliwia utajnienie informacji i przesłanie jej w formie nieczytelnej dla osób trzecich
+ 
+Szyfrowanie symetryczne 
+ 
+Inaczej  algorytm kryptograficzny, który do szyfrowania i deszyfrowania tekstu jawnego wykorzystuje te same klucze. W przypadku, gdy do szyfrowania i deszyfrowania wykorzystywane są różne klucze, to jest możliwe wyznaczenie klucza szyfrującego z deszyfrującego i odwrotnie. Ujawnienie jednego z kluczy umożliwia odtworzenie zaszyfrowanej wiadomości
+ 
+AES bazuje na zasadzie, zwanej siecią substytucji-permutacji. Wykazuje się dużą szybkością pracy zarówno w przypadku sprzętu komputerowego, jak i oprogramowania[9]. W przeciwieństwie do swego poprzednika, algorytmu DES, AES nie używa Sieci Feistela. AES posiada określony rozmiar bloku – 128 bitów, natomiast rozmiar klucza wynosi 128, 192, lub 256 bitów. Funkcja substytucyjna ma bardzo oryginalną konstrukcję, która uodparnia ten algorytm
+ 
+TRYB ECB
+ 
+Tryb elektronicznej książki kodowej jeden z najprostszych trybów szyfrowania wiadomości z wykorzystaniem szyfru blokowego. W trybie tym blok tekstu jawnego jest szyfrowany w blok szyfrogramu. Możliwe jest niezależne szyfrowanie oraz deszyfrowanie bloków wiadomości, takie zachowanie pozwala, teoretycznie, stworzyć książkę kodową tekstu jawnego i odpowiadającemu mu szyfrogramu, która będzie zawierała 2n różnych wpisów (n – długość bloku w bitach)
+ 
+Wadą tego trybu jest fakt, że kryptoanalitycy, dysponując kilkoma tekstami jawnymi i odpowiadającymi im szyfrogramami, mogą rozpocząć odtwarzanie książki kodowej – dla szyfrów z długimi kluczami całkowite odtworzenie książki kodowej jest jednak nierealne. Atakujący ma także możliwość zmiany wiadomości bez znajomości klucza
+ 
+TRYB CBC
+ 
+Tryb wiązania bloków zaszyfrowanych (z ang. Cipher Block Chaining – CBC) – jeden z trybów pracy szyfrów blokowych wykorzystujący sprzężenie zwrotne, samosynchronizujący się; w trybie tym blok tekstu jawnego jest sumowany modulo 2 z szyfrogramem poprzedzającego go bloku w związku z czym wynik szyfrowania jest zależny od poprzednich bloków. Pierwszy blok, przed zaszyfrowaniem, jest sumowany modulo dwa z losowo wygenerowanym wektorem początkowym IV (ang. initialization vector), wektor ten nie musi być utrzymywany w tajemnicy
+ 
+b. Klucz domyślny i klucz użytkownika w kontekście naszej aplikacji
+ 
+ Klucz domyślny i użytkownika 
+ 
+ Po wyborze klucza domyślnego zostanie on wygenerowany automatycznie, a następnie zapisany w bazie danych na serwerach Xopero Cloud. Nie jest on znany użytkownikowi, więc nie musi się on troszczyć o jego bezpieczeństwo. Korzystając z klucza domyślnego użytkownik może, za pośrednictwem panelu web, pobierać oraz generować linki publiczne do zasobów przesłanych jako backup. Klucz użytkownika zapewnia wyższe bezpieczeństwo Twoich danych niż klucz domyślny, jest on znany tylko i wyłącznie użytkownikowi, nie jest przechowywany na serwerach Xopero Cloud, zatem obowiązek jego prawidłowego zabezpieczenia spada na użytkownika. W przypadku utraty klucza użytkownika, dane przesłane na serwery Xopero Cloud są niemożliwe do odzyskania. Korzystając z klucza użytkownika nie ma możliwości pobierania oraz generowania linków publicznych do zasobów przesłanych jako backup. Niezależnie od wyboru klucza szyfrującego oraz aplikacji dane są szyfrowane oraz deszyfrowane po stronie użytkownika.
+9
+ 
+5. Retencja danych - przechowywanie przez 12 mieś. danych w celu zachowania bezpieczeństwa
+ 
+6. Kopia pełna - zawiera pełna informacje o pliku, kopia może być szyfrowana lub kompresowana algorytmami
+ 
+Na plus: - szybkie odtwarzanie danych
+Na minus: - zajmuje dużo miejsca w magazynie - wolny czas wykonwania
+--
+Kopia przyrostowa - polega na tworzeniu jednej kopii pełnej i po niej łańcucha kopii przyrostowych. A w nich zapisywana jest informacja o tym jak dane zmieniły się od ostatniej kopii.
+ 
+Na plus: - szybkie wykonywanie kopii - oszczędność miejsca w magazynie danych
+Na minus: - wolne odtwarzanie dnaych - zwiększony ruch sieciowy - potrzeba więcej miejsca, by pobrać wszystkie wersje
+--
+Kopia różnicowa - w przypadku tej kopii odniesieniem będzie ostatnia kopia pełna a nie poprzednia. Do przywrócenia danych wystarczy wtedy zestaw dwóch wersji
+ 
+7. Wykonywanie kopii zapasowych na prawach użytkownika
+ 
+Najprostsza metoda to ręczne utworzenie kopii zapasowej plików i ustawień na nośniku wymiennym lub w lokalizacji sieciowej. Istnieje możliwość wybrania plików i ustawień, których kopia zapasowa zostanie utworzona, a także częstotliwości jej tworzenia.
+ 
+ 
+8. Zmienne środowiskowe - wpływają na działanie procesów uruchamianych w OS, różne programy uzyskują parametry poprzez zmienne środowiskowe
+ 
+9. Harmonogram (systemowy i obecny w naszej aplikacji)
+ Systemowy - Umożliwia on planowanie zadań, które po spełnieniu warunku zostaną wykonane automatycznie
+ **Aplikacji: Jest to bardzo ważny element w tworzeniu aplikacji. Musimy znać jak najwięcej szczegółów odnośnie 
+projektu, czas jaki mamy dostępny aby odpowiednie rozplanować sobie pracę i przede wszystkim musimy mieć pojęcie jakiej technologii i jakich rozwiązań użyjemy. 
+ 
+10. Pliki ukryte - niewidoczny plik, służą zazwyczaj do przechowywania configu różnych programów (UNIX) lub są istotne dla działania systemu (DOS/Windows)
+ 
+11. Filtry plików - Jest to rozwiązanie ułatwiające tworzenie kopii zapasowej, pozwala nam ono na precyzyjne określenie
+elementów, który mają zostać skopiowane, a które nie. Warto też dodać iż można dodać do tego warunki, które
+muszą zostać spełnione aby konkretny plik został skopiowany
+ 
+12. Usługa systemowa
+ 
+Uprawnienia NTFS- są stosowane do każdego pliku i folderu przechowywanego na woluminie sformatowanym przy użyciu systemu plików NTFS.
+ 
+Uprawnienia Udziału:  są używane do zarządzania komputerami z systemem plików FAT32 lub innymi komputerami, na których nie jest używany system plików NTFS. 
+ 
+Usługi: Są to programowe użytkowe działające w tle Windwosa, większość tych programów jest zarządzana za pośrednictwem systemu i nie mamy do nich dostępu
+ 
+13. Active Directory - jest usługą katalogową (hierarchiczną bazą danych). Usprawnia zarządzanie relacjami między ludźmi, sieciami, informacjami i urządzeniami sieciowymi.
+ 
+W AD informacje grupowane są hierarchicznie, mogą przyjmować struktury: DRZEWA, LAS'u, DOMENY 
+ 
+
+14. Wirtualizacja (Hypervisor - Program komputerowy)
+ 
+Wirtualizacja typu pierwszego charakteryzuje się tym że program komputerowy realizujący zadania związane z wirtualizacją, pracuje bezpośrednio na sprzęcie komputera fizycznego i przydziela zasoby sprzętowe maszynom wirtualnym bez pośrednictwa systemu operacyjnego gospodarza
+ 
+Wirtualizacja typu drugiego działa w OS gospodarza czyli fizycznego komputera i poprzez system operacyjny przydziela zasoby dla maszyn wirtualnych.
+ 
+Maszyna virtualna (VM) - kontroluje wszystkie odwołania uruchamianego programu bezpośrednio do sprzętu lub OS i zapewnia ich obsługę. Dzięki temu program na VM'ie "myśli" ze działa na rzeczywistycznym sprzęcie, podczas gdy w istocie pracuje na VM'ie
+ 
+15. Redundancja - nadmiar rzeczy koniecznych. Proces ten w polega na powielaniu pewnych elementów wchodzących w skład systemu, aby zmniejszyć ryzyko potencjalnej awarii
+ 
+16. Chmura - usługi oferowane przez dane oprogramowanie oraz konieczną infrastrukturę. Przechowywanie danych w chmurze polega na tym, że pliki zapisywane są na serwerze, do których użytkownik ma dostęp z urządzenia podłączonego do Internetu. Serwery pracujące jako chmury internetowe są umieszczane w specjalnych szafach serwerowych w serwerowni.
+ 
+---------------------------------------------------------------------------------------------------------------------------------------
+ 
+1. NAS (Network Attached Storage) - technologia umożliwiająca podłączenie zasobów pamięci dyskowych bezpośrednio do sieci komputerowej. Zaletą NAS jest możliwość jego stosowania w sieciach opartych na różnych rozwiązaniach klienckich, przez co dane są osiągalne bez względu na rodzaj zainstalowanego systemu operacyjnego.
+ 
+2. QNAP, Synology, Asustor, Netgear
+Firmy te zajmują się urządzeniami sieciowymi, oferują pełna kontrolę danych i bogate wyposażenie multimediale dedykowane dla biznesu
+ 
+3. Mono - zestaw narzędzi umożliwiający uruchomienie programów dla .NET (w skład wchodzi kompilator C# oraz środowisko CLR[Common Language Runtime]
+ 
+Mono składa się z trzech grup komponentów:
+ 
+- Głównych komponentów (Core Components)
+- Stosu deweloperskiego Mono/Linux/GNOME
+- Stosu zgodności z systemami Microsoft
+ 
+4. System wersjonowania - oprogramowanie służące do śledzenia zmian głównie w kodzie źródłowym oraz pomocy programistom w łączeniu zmian dokonanych w plikach przez wiele osób w różnym czasie.
+ 
+Systemy kontroli wersji dzielą się na:
+ 
+- lokalne, pozwalające na zapisanie danych jedynie na lokalnym komputerze
+- scentralizowane, oparte na architekturze klient-serwer
+- rozproszone, oparte na architekturze P2P[model zapewniający wszystkim hostom te same uprawnienia
+ 
+Git - to rozproszony system kontroli wersji
+ 
+5. Docker, Kubernetes
+ 
+Docker jest określany jako narzędzie, które pozwala umieścić program oraz jego zależności (biblioteki, pliki konfiguracyjne, lokalne bazy danych itp.) w lekkim, przenośnym, wirtualnym kontenerze, który można uruchomić na prawie każdym serwerze z systemem Linux. Kontenery wraz z zawartością działają niezależnie od siebie i nie wiedzą o swoim istnieniu. Mogą się jednak ze sobą komunikować w ramach ściśle zdefiniowanych kanałów wymiany informacji.
+ 
+Kubernetes
+ 
+Kubernetes to przenośna, rozszerzalna platforma oprogramowania open-source służąca do zarządzania zadaniami i serwisami uruchamianymi w kontenerach, która umożliwia deklaratywną konfigurację i automatyzację.
+ 
+Kubernetes dostarcza środowisko do uruchamiania systemów rozproszonych o wysokiej niezawodności. Kubernetes obsługuje skalowanie aplikacji, przełączanie w sytuacjach awaryjnych, różne scenariusze wdrożeń itp.
+ 
+6. Wsparcie dla wersjonowania stron
+Jest to niewątpliwie bardzo wygodna metoda na zapisywanie zmian, którą możemy znaleźć w Githubie lub Bitbucket
+Github: Nieograniczona ilość osób korzystających z repozytorium
+	Wygoda w użytkowaniu dla projektów open-source
+	Wady:
+	Po zapłacie, posiadamy ograniczoną liczbę repozytoriów w zależności jaki plan zakupów został przez nas wykupiony
+ 
+Bitbucket: Możliwość utworzenia prywatnego repozytorium
+	   Nieograniczona ilość prywatnych repozytoriów
+	   Wady: 
+	   Ograniczenie do 5 użytkowników na jedno repozytorium w przypadku wersji darmowej
+ 
+7. Klastra to nic innego jak połączona ze sobą grupa komputerów, które na celu mają stworzenie wspólnego środowiska do pracy. Jednostki komputerowe, które są cześcią klastry nazywane są węzłami
+ Klastry dzielą się na 3 typy:
+	Wydajnościowe:
+		Złączone są aby uzyskac jak największą moc obliczeniową jednocześnie przydzielając 
+		różne zadania węzłom
+	Niezawodnościowe: 
+		Każda klastra wykonuje swoje zdanie, w przypadku uszkodzenia jednej, zadanie które wykonywała jednostka jest przekazane innej, sprawnej klastrze.
+	Równoważenia: 
+		System, w którym każda jednostka wykonuje własne zadanie narzucone z góry przez klastrę. 
+		Umożliwia to jednoczesną samodzielność klastry jak zdolność to współpracy z kilkoma innymi w celu efektywniejszego wykonania zadania
+ 
+8. Centrum danych (data center) - budynek przeznaczony do przechowywania działającej infrastruktury informatycznej serwerów, urzadzeni przechowywania danych oraz infrastruktury sieciowej
+ 
+Centra danych zawierają wiele mechanizmów bezpieczeństwa takie jak: redundancja serwerów etc., systemy wentylacji i chłodzenia, zasilanie awaryjne, kontrole wstępu etc.
+ 
+9. RAID (ang. Redundant Array of Independent Disks, Nadmiarowa macierz niezależnych dysków) – polega na współpracy dwóch lub więcej dysków twardych w taki sposób, aby zapewnić dodatkowe możliwości, nieosiągalne przy użyciu jednego dysku jak i kilku dysków podłączonych indywidualnie.
+ 
+ 
+RAID 0 (tzw. stripe) - Dane zapisywane są na kilku dyskach, np. pierwszy blok na pierwszym dysku, drugi na drugim itd. Dzięki temu uzyskujemy znaczne przyspieszenie operacji odczytu i zapisu. Wadą tego systemu jest brak odporności na awarię. Jeśli dowolny dysk ulegnie uszkodzeniu, to najczęściej tracimy wszystkie dane, gdyż każdy dysk zawiera tylko część danych.
+ 
+RAID 1 (tzw. mirroring) - Połowa dysków zawiera dane a druga połowa jest ich dokładną kopią. W tym przypadku jesteśmy zabezpieczeni na awarię każdego z dysków, jednakże tracimy 50% całkowitej pojemności.
+ 
+RAID 10 - W tym przypadku dane są zapisywane na połowie dysków jako stripe(RAID-0), a druga połowa jest ich lustrzaną kopią (RAID-1) – mirroring. Jesteśmy odporni na awarię jednego dysku lub nawet dwóch, ale nie dowolnych dwóch. Należy jednak pamiętać, iż w przypadku awarii dysku i jego lustrzanej kopii (mirroru), wszystkie dane zostaną utracone.
+ 
+RAID 4 - dane zapisywane są na kilku dyskach, a dodatkowo na osobnym dysku są umieszczne sumy kontrolne, które w przypadku awarii jednego z dysków umożliwiają jego odtworzenie poprzez wykonanie określonych operacji matematycznych.
+ 
+RAID 5 - dane są również zapisane na wszystkich dostępnych dyskach, tak jak ma to miejsce w przypadku RAID4. Z tą różnicą jednak, że częściowe sumy kontrolne są rozłożone na wszystkie dyski.
+ 
+Takie rozwiązanie ma jednak zasadniczą wadę. Po awarii jednego z dysków, macierz musi odbudować sumy kontrolne, obciążając mocno system. Drugi aspekt to rozbudowa – jeśli chcemy dołożyć do istniejącego systemu dodatkowy dysk, cała macierz musi zostać przebudowana.
+ 
+RAID DP - Jest to opatentowany przez firmę NetApp system RAID, który charakteryzuje się odpornością na awarię dwóch dowolnych dysków (DP – Dual Parity). Jest to modyfikacja RAID 4, z tą różnicą, że zamiast jednego mamy do dyspozycji dwa dyski parzystości, każdy w inny sposób przelicza sumy kontrolne.
+ 
+* DDP (Dynamic Disk Pool) to alternatywny system RAID, DDP posiada architekturę nowej generacji, która minimalizuje skutki awarii dysku, a powrót systemu do kondycji przed awarią jest aż do ośmiu razy szybszy niż w tradycyjnym RAID-6. DDP zarządza dystrybucją danych, informacjami o parzystości oraz dyskami spare w całej puli dysków. Jego inteligentny algorytm (siedem patentów) określa, które dyski mają być używane do przechowywania określonego segmentu, zapewniając pełną ochronę danych.
+ 
+10. Systemy plików (FAT, NTFS, ext - platfmory, podstawowe różnice)
+ 
+FAT - system plików powstały pod koniec lat 70. Stosowany w DOS oraz MS Windows
+ 
+NTFS - system plików standardowy dla Windowsa, a także wspierany przez Linux'a, a także w MacOs jednak w trybie tylko do odczytu. Został opracowany w celu zastąpienia FAT'u, charakteryzuje się lepszą predkością w porównaniu do systemów FAT, oraz może przywracać pliki bazując na błędach związanych z dyskiem
+ 
+ext - najbardziej popularny linuksowy system plików, zastąpiony szybko przez ext2, jego kluczową wadą było to że po dłuższym działaniu prowadził do dużej fragmentacji
+ 
+11. Rejestr systemu Windows, to baza danych która przechowuje informacje o naszej konfiguracji komputera, na te dane składają się:
+	Informacje o używanych przez użytkownika portalach
+	profile użytkowników
+	informacje po programach i dokumentach
+	konfiguracje sterowników zawartych w naszym systemie
+	właściwości ikon programów i folderów
+Rejestr jest stworzony na zasadzie hierarchicznego drzewa, które rozłożone jest na sekcje, podsekcje i klucze
+ 
+12. Foldery systemowe (Windows, Linux)
+ 
+Windows: folder systemowy to miejsce na przechowywanie plików typu DLL potrzebnych do prawidłowego funkcjonowania systemu operacyjnego 
+ 
+Linux: W systemie GNU/Linux zaimplementowano hierarchiczną (drzewiastą) strukturę katalogów, jednym z najważniejszych uprawnień jest /root, daje ono kontrolę głównego administratora 
+ 
+13. Amazon Web Service (S3, ec2), Azure
+Amazon S3: Prosty w użytkowaniu system internetowy do przechowywania i zarządzani danymi, o praktycznie nielimitowanej ilości przechowywania danych
+Amazon EC2 Serwis internetowy, który oferuje moc obliczeniową chmury obliczeniowej
+Microsoft Azure to zestaw usług w chmurze, którego celem jest uproszczenie organizacji wyzwaniom biznesowym. Zapewnia swobodę tworzenia i wdrażania aplikacji oraz zarządzania nimi w globalnej sieci
+ 
+14. OpenStack -  to chmura, którą można zainstalować na swoim sprzęcie i tworzyć zarówno chmury prywatne jak i publiczne. Cały projekt jest open Source i został on zainicjonowany przez NASA i Rackspace.
+Najważniejszymi komponentami OpenStacka są:
+ 
+• keystone – zarządzanie użytkownikami oraz uwierzytelnianiem,
+• glance – tworzenie oraz zarządzanie obrazami maszyn wirtualnych,
+• neutron – usługa odpowiedzialna za zarządzanie siecią,
+• swift – obiektowy magazyn danych,
+• cinder – blokowy magazyn danych,
+• horizon – przeglądarkowy interfejs użytkownika
+ 
+---------------------------------------------------------------------------------------------------------------------------------------
+ 
+1. Linki symboliczne - specjalny rodzaj pliku, który podobnie jak „zwykły skrót” wskazuje na inny plik lub katalog. Główna różnica polega na tym, że większość programów traktuje taki „link” nie jako „skrót”, a tak jakby wskazany plik/katalog faktycznie znajdował się w tym miejscu. Skasowanie linku symbolicznego nie powoduje skasowania pliku/katalogu na który link wskazywał.
+ 
+2.
+Specjalne pliki systemowe
+rozszerzenie sys, nazwa rozszerzenie systemowego w systemie windows, pliki te zawierają informacje dotyczące pracy sterowników 
+ 
+pagefile.sys: specjalny plik systemowy wykorzystany przez systemy operacyjne jako dodatkowa pamięć wspomagająca mechanizm stronicowania i pamięci wirtualne
+ 
+hiberfil.sys: jest to plik odpowiedzialny za system hibernacji komputera
+ 
+swapfile.sys: jest używany przez system operacyjny Windows do przechowywania całej zawartości pamięci RAM podczas hibernacji. 
+ 
+3. Rejestr zdarzeń Windows i logowanie zdarzeń w kontekście programowania
+ 
+Rejestr - ...
+ 
+Logowanie zdarzeń w kontekście programowania - Zdarzenia w postaci specjalnych rekordów są przechowywane przez system operacyjny w tzw. kolejkach zdarzeń (ang. event queues) zbudowanych w oparciu o strukturę FIFO. Kolejki są na ogół przypisane po jednej do wątku (każda aplikacja ma choć jeden). System operacyjny utrzymuje też własne kolejki zdarzeń. Każde zdarzenie wpada do jednej lub większej liczby kolejek. Np. zdarzenia klawiatury wpadają tylko do kolejki aktywnej aplikacji, a zapytanie o możliwość zamknięcia systemu do kolejek wszystkich aplikacji.
+ 
+4. Grupa robocza – mała grupa komputerów, które pracują w sieci niezapewniającej centralnej administracji zasobami.
+ 
+Każdy komputer w grupie roboczej posiada własną przechowywaną lokalnie bazę kont SAM (Security Account Manager) i dlatego użytkownik musi mieć stworzone konto na każdym komputerze, do którego chce się zalogować. Podczas pracy w grupie roboczej nie obowiązuje zasada pojedynczego konta i pojedynczego logowania. Grupa robocza jest preferowana wyłącznie w małych sieciach biurowych oraz domowych, ponieważ w miarę zwiększania ilości komputerów pracujących w sieci, znacznie komplikuje się zarządzanie nią.
+Grupę roboczą dla systemów Windows możemy ustawić podczas instalacji, bądź w późniejszej fazie jego konfigurowania. Domyślnie system Windows sam tworzy grupę roboczą podczas instalacji. Jeżeli nasz komputer należy do innej (inna niż domyślna) grupy roboczej możemy mieć problemy z  wyświetleniem zawartości wszystkich komputerów w sieci. 
+ 
+5. IPv4  - Czwarta wersja protokołu komunikacyjnego IP przeznaczonego dla Internetu. Identyfikacja hostów w IPv4 opiera się na adresach IP. Dane przesyłane są w postaci standardowych datagramów. Wykorzystanie IPv4 jest możliwe niezależnie od technologii łączącej urządzenia sieciowe .
+ 
+IPv6 - protokół komunikacyjny, będący następcą protokołu IPv4, do którego opracowania przyczynił się w głównej mierze problem małej, kończącej się liczby adresów IPv4. Podstawowymi zadaniami nowej wersji protokołu jest zwiększenie przestrzeni dostępnych adresów poprzez zwiększenie długości adresu z 32 bitów do 128 bitów, uproszczenie nagłówka protokołu oraz zapewnienie jego elastyczności poprzez wprowadzenie rozszerzeń, a także wprowadzenie wsparcia dla klas usług, uwierzytelniania oraz spójności danych
+ 
+6. MSI, EXE
+ 
+Pliki EXE: Plik exe to plik o rozszerzeniu służącym do inicjalizacji plików deweloperskich potrzebnych do uruchomienia oprogramowania
+Pliki MSI: Plik MSI to to plik pakietów instalatora Windows, wykorzystywany do dystrybucji instalatorów i programów firm trzecich
+ 
+7. Skrypty .BAT, skrypty .sh
+ 
+.BAT - program komputerowy wykonywany w trybie wsadowym, tj. bez wpływu użytkownika na przebieg programu. Programy wsadowe mogą być wykonywane w różnych systemach operacyjnych, w szczególności w systemach Unix, Linux, DOS, Windows i innych.
+ 
+Program wsadowy z założenia nie oczekuje współpracy (interakcji) z użytkownikiem w trakcie wykonywania. Po uruchomieniu użytkownik nie ma wpływu na przebieg programu wsadowego, może jedynie oczekiwać na jego zakończenie lub ewentualnie przerwać jego działanie.
+ 
+.SH - Skrypt w języku sh to plik tekstowy zawierający dowolne polecenia wykonywalne oraz wyrażenia języka sh. Tak więc w praktyce nawet prosta sekwencja poleceń, normalnie wydawanych w powłoce sh, zapisana w pliku staje się skryptem. Aby taki skrypt można było wykonywać bezpośrednio poprzez podanie nazwy należy nadać mu atrybut wykonywalności.
+ 
+8. Ograniczenia systemów w kontekście ograniczeń dotyczacych scieżek do plików
+ 
+Domyślnym limitem systemów Windows dot. długości ścieżek do plików jest 260 znaków. W systemach Unix/Linux limit ten został zniesiony lub jest wielokrotnie większy (w zależności od dystrybucji oraz użytego systemu plików)
+ 
+ - W systemach operacyjnych Windows, każda ścieżka zakończona jest niewidocznym znakiem {null} zwanym terminatorem. Znak ten będzie występował zawsze w ścieżce i nie można go zastąpić. Dlatego też jest on teoretycznie wliczony w limit znaków ścieżki, jednak użytkownik nigdy nie ma wpływu na jego treść.
+ 
+ - Ograniczenie dotyczące długości ścieżki zostało zmienione w systemach Windows 10 oraz Windows Server 2016.
+ 
+9. Typy i rodzaje plików:
+ 
+W systemie DOS długość rozszerzenia była ograniczona do 3 znaków. Z tego powodu dla niektórych rodzajów plików przyjęły się dwa różne rozszerzenia, np. jpg i jpeg oraz htm i html.
+ 
+Systemy Uniksowe (ale nie tylko one) nie posługują się mechanizmem rozszerzeń plików w taki sposób. Ponieważ nazwa pliku może zawierać dowolne znaki, czyli także kropki, rozszerzenie jest tu jedynie częścią nazwy pliku. 
+ 
+– pliki tekstowe: TXT, DOC, DOCX, PDF, HTML
+– pliki graficzne: JPEG, BMP, GIF, PNG
+– pliki muzyczne: MP3, ACC, WAV, MID
+– pliki filmowe: MP4, AVI, XVID, MPEG
+– pliki zarchiwizowane/skompresowane: RAR, ZIP, ARJ
+– pliki systemowe: SYS, DLL
+– pliki wykonywalne: EXE, COM
+ 
+10. DLL a EXE
+ 
+EXE:
+ - plik wykonywalny
+ - uruchamiany indywidualnie
+ - zawiera główną funkcje (Main)
+ - tworzy oddzielny proces i alokuje dla siebie pamieć
+ 
+DLL:
+ - biblioteka przechowywująca implementacje różnych podprogramów programu lub zasoby programu
+ - nie da się go uruchomić indywidualnie
+ - nie zawiera głównej funkcji
+ - wspomaga plik .exe
+ - udostępnia procesy i pamieć dla aplikacji
+ 
+11. Procesy a wątki
+ 
+Procesy:
+ - posiadają niezależne zasoby
+ - "Niepewne zakończenie" powoduje utratę procesu
+ 
+Wątki:
+ - wątki działające w danym procesie przestrzeni adresowej dzielą między sobą zasoby
+ - tworzenie wątków zajmuje mniej czasu niż tworzenie procesów
+ - wątek może zostać odzyskany pomimo "Niepewnego zakończenia"
+ 
+12. Wielowątkowość 
+ 
+Cecha systemu operacyjnego, dzięki której w ramach jednego procesu może być wykonywanych kilka zadań nazywanych wątkami. Wszystkie wątki (zadania) w ramach tego samego procesu współdzielą tą samą wirtualną przestrzeń adresową zawierającą kod programu i jego dane.
+ 
+Wielowątkowość może także odnosić się do samych procesorów. W takim przypadku oznacza ona możliwość jednoczesnego wykonywania wielu wątków w sposób sprzętowy na pojedynczej jednostce wykonqawczej nazywany jest  rdzeniem fizycznym
+ 
+Nieaktywne części rdzenia mogą w tym samym czasie wykonywać inny wątek, zwiększając efektywność wykorzystania całego procesora, a tym samym jego wydajność. W zależności od rodzaju technik zastosowanych do obsługi dodatkowych wątków sprzętowych spotyka się od 2 (najczęściej) do nawet 8 wątków realizowanych sprzętowo na pojedynczym rdzeniu fizycznym procesora. Każdy taki wątek realizowany sprzętowo nazywany jest rdzeniem wirtualnym
+ 
+13. Grafika wektorowa - to rodzaj grafiki, gdzie obraz jest stworzony za pomocą figur albo brył geometrycznych, które są matematycznie zdefiniowane zaletą jest bardzo dobra skalowalność tej grafiki, nie sprawuje się dobrze w przypadku użycia większej ilości szczegółów 
+ 
+Grafika rastrowa - to rodzaj grafiki, polegający na wyświetlaniu pikseli o odpowiednich kolorach w odpowiednich miejscach
+ 
+14. Bitlocker: jest to algorytm o charakterze kryptograficznym dla dysków w systemie operacyjnym windows. Szyfruje on dane na każdej możliwej warstwie
+ 
+15. HDD a SSD - HDD wykorzystują nośnik magnetyczny, a dokładniej wirujący talerz lub zespół talerzy pokryty cienką warstwą magnetyczną. Zapis i odczyt realizowany jest za pomocą głowicy – fizycznie. SSD bazują na pamięciach półprzewodnikowych i nie zawierają części ruchomych.
+ 
+16. UEFI a BIOS
+ 
+UEFI to interfejs pomiędzy OS a firmware, który został opracowany jako następca BIOS'u, BIOS wykorzystuje interfejs tekstowy natomiast nowy UEFI działa w trybie graficznym. BIOS do obsługi dysku wykorzystywał MBR, natomiast UEFI korzysta z systemu GPT 
